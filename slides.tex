@@ -1,0 +1,116 @@
+\pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
+\documentclass[10pt, xcolor={usenames, dvipsnames}]{beamer}
+
+%\PassOptionsToPackage{cmyk}{xcolor}
+%\usepackage[cmyk]{xcolor}
+%\documentclass[handout, 10pt, xcolor={usenames, dvipsnames}]{beamer}
+
+%\usepackage{etex}
+\usepackage[french, english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{upgreek,textgreek}
+%\usepackage{textcomp}
+\usepackage{animate}
+
+\usepackage{pifont}
+\newcommand{\cmark}{\ding{51}}
+\newcommand{\xmark}{\ding{55}}
+
+%\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{amssymb}
+%\usepackage{mathtools}
+
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage[style=alphabetic, autocite=inline, firstinits=true, maxnames=2]{biblatex}
+\bibliography{bibliographie}
+\renewcommand*{\bibfont}{\small}
+
+
+\usepackage{tabularx, booktabs}
+\usepackage{tikz}
+\definecolor{light-gray}{gray}{0.65}
+\tikzset{fade on/.code={\only<#1>{\color{light-gray}}}}
+\tikzset{hide on/.code={\only<#1>{\color{white}}}}
+\tikzset{bold on/.code={\only<#1>{\bfseries}}}
+\tikzset{
+  opinvisible/.style={opacity=0.2},
+  visible on/.style={alt={#1{}{opinvisible}}},
+  alt/.code args={<#1>#2#3}{%
+    \alt<#1>{\pgfkeysalso{#2}}{\pgfkeysalso{#3}} % \pgfkeysalso doesn't change the path
+  },
+}
+
+\usetikzlibrary{plotmarks,shapes}
+\usepackage{colortbl}
+\usepackage{ulem}
+\usepackage{multicol}
+\usepackage[overlay]{textpos}
+\usepackage{multirow}
+\usepackage{ragged2e}
+\usepackage{rotating}
+\usepackage{fancybox}
+\usepackage{ulem}
+\usepackage{overpic}
+\usepackage{enumerate}
+\usepackage{xfrac}
+\usepackage{pgfplots}
+
+\usepackage{transparent}
+
+\usepackage{epstopdf}
+\usepackage{epsfig}
+
+\newcommand{\REF}{\textcolor{purple}{REF}}
+\newcommand{\YES}[1]{\textcolor{green}{#1}}
+\newcommand{\NO}[1]{\textcolor{red}{#1}}
+
+\usetheme{metropolis}
+
+\title{Breaking the Scalability Barrier of Causal Broadcast for Large and Dynamic Systems}
+\author{Brice N\'edelec, Pascal Molli, and \textbf{Achour Most{\'e}faoui}}
+\date{Workshop O'Browser 2018}
+\institute{University of Nantes, LS2N}
+
+
+
+\begin{document}
+
+\maketitle
+
+\begin{frame}{Introduction}
+  Causal broadcast is the core of many distributed applications such as
+  distributed social networks, distributed collaborative softwares, or
+  distributed data stores.
+\end{frame}
+
+\begin{frame}{Large scale static systems: \YES{}}
+\end{frame}
+
+\begin{frame}{But dynamic systems: \NO{}}
+\end{frame}
+
+\begin{frame}{Problem}
+  Keeping the complexity of large scale static systems in dynamic settings where
+  processes can join, leave, or self-reconfigure at any time
+\end{frame}
+
+\begin{frame}{Proposal: PC-broadcast}
+  We define safe links, and processes use all and only safe links for causal broadcast.
+\end{frame}
+
+\begin{frame}{Network conditions may lead to unbounded space consumption}
+\end{frame}
+
+\begin{frame}{Handling failures}
+\end{frame}
+
+\begin{frame}{Experimentation: small negative impact on the overlay}
+\end{frame}
+
+\begin{frame}{Conclusion}
+\end{frame}
+
+\end{document}
