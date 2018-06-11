@@ -237,7 +237,7 @@ overhead remains constant $O(1)$.
   \end{enumerate}
 
 
-\begin{minipage}{0.32\textwidth}
+  \begin{minipage}{0.32\textwidth}
     \begin{center}
       % \subfloat[Part A][\label{fig:generalsolveA}Process~A broadcasts $a$.]
       \input{input/figpreventivesolveA.tex}
@@ -280,20 +280,96 @@ overhead remains constant $O(1)$.
 \end{frame}
 
 
-\begin{frame}{Network conditions may lead to unbounded space consumption}
+\begin{frame}{The size of buffers may increase without bound}
+
+  System conditions such as high latency, crashes, or unreliable communications
+  may lead to unbounded growth of buffers.
+
+  \begin{minipage}{0.98\textwidth}
+    \begin{center}
+      % \subfloat[Part A][\label{fig:generalsolveA}Process~A broadcasts $a$.]
+      \input{input/figbufferproblemA.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.98\textwidth}
+    \begin{center}
+      % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
+      % delivers $a$. Process~B forwards $a$ using its FIFO links.]
+      \input{input/figbufferproblemB.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.98\textwidth}
+    \begin{center}
+      % \subfloat[Part C][\label{fig:generalsolveC}Process~B broadcasts $b$.]
+      \input{input/figbufferproblemC.tex}
+    \end{center}
+  \end{minipage}
+
+  
 \end{frame}
 
 \begin{frame}{Handling failures}
+
+  Above a buffer size threshold, retry. Too many tries, abort.
+
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part A][\label{fig:generalsolveA}Process~A broadcasts $a$.]
+      \input{input/figbuffersolveA.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
+      % delivers $a$. Process~B forwards $a$ using its FIFO links.]
+      \input{input/figbuffersolveB.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part C][\label{fig:generalsolveC}Process~B broadcasts $b$.]
+      \input{input/figbuffersolveC.tex}
+    \end{center}
+  \end{minipage}
+  
+  \begin{center}
+  \begin{minipage}{0.35\textwidth}
+    \begin{center}
+    % \subfloat[Part D][\label{fig:generalsolveD}Process~A receives and 
+    % delivers $b$. Process~A forwards $b$ using its FIFO links.]
+      \input{input/figbuffersolveD.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.35\textwidth}
+    \begin{center}
+    % \hspace{40pt}
+    % \subfloat[Part E][\label{fig:generalsolveE}Process~C cannot receive $b$
+    % without having received $a$ beforehand.]
+      \input{input/figbuffersolveE.tex}
+    % \caption{\label{fig:generalsolve}Causal broadcast~\cite{friedman2004causal}
+    %   ensures causal order.}
+    \end{center}
+  \end{minipage}
+  \end{center}    
+
 \end{frame}
 
 \begin{frame}{Experimentation: small negative impact on the overlay}
+
+  \begin{center}
+    \includegraphics[width=0.8\textwidth]{img/delay.eps}
+  \end{center}
+
 \end{frame}
 
 \begin{frame}{Conclusion}
+  
+  PC-broadcast constitutes a simple solution for causal broadcast.
+
 \end{frame}
 
-\begin{frame}{To be continued\ldots}
-  Removing the last monotonic upper bound on space complexity
+\begin{frame}[standout]
+  To be continued\ldots Removing the last monotonic upper bound on space complexity.
 \end{frame}
 
 \end{document}

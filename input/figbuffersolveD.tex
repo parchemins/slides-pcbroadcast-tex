@@ -1,0 +1,35 @@
+
+\begin{tikzpicture}[scale=0.75]
+  
+  \small
+  
+  \newcommand\X{210/5pt};
+  \newcommand\Y{30pt};
+  
+  \draw[->] ( -0.5*\X, 0.5*\Y) -- ( -5+0*\X, 0*\Y);
+  \draw[->] ( -0.5*\X, 0*\Y) -- ( -5+0*\X, 0*\Y);
+  \draw[->] ( -0.5*\X, -0.5*\Y) -- ( -5+0*\X, 0*\Y);  
+
+  \draw[fill=white] (0*\X, 0*\Y) node{\textbf{A}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+  \draw[fill=white] (1*\X, -1*\Y) node{\textbf{B}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+  \draw (1*\X, 5-1*\Y) node[anchor=south]{$y$};
+  \draw[fill=white] (2*\X,  0*\Y) node{\textbf{D}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+  \draw (2*\X, 5-0*\Y) node[anchor=south]{$\pi_2$};
+
+  \draw[->, dashed] (5+0*\X, 0*\Y) -- (-5+2*\X, 0*\Y);
+
+  \draw[->](5+0*\X, 0*\Y) node[anchor=south west]{$[y]_2$} -- 
+%  node[sloped, above]{$y$}
+  (-5+1*\X, -1*\Y); %% A->B
+  \draw[->](5+1*\X, -1*\Y) --
+  %node[sloped, above]{$a'''$}
+  (-5+2*\X, 0*\Y); %% B->D
+
+  \draw[decorate, decoration={snake, amplitude=0.3mm}](-5+2*\X, 5+0*\Y)
+  to[out=180, in=-90] (1.45*\X, 20+0*\Y);
+  \draw[->, decorate, decoration={snake, amplitude=0.3mm}](1.45*\X, 20+0*\Y)
+  to[out=90+45, in=90-35] node[sloped, above]{$\rho_2$}(5+0*\X, 15+0*\Y);
+%  node{\LARGE$\times$}; 
+
+  \draw[->](5+2*\X, 0*\Y) -- node[above]{$x$}( 2.5*\X, 0*\Y);
+\end{tikzpicture}
