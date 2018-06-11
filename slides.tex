@@ -1,26 +1,18 @@
 \pdfpageattr {/Group << /S /Transparency /I true /CS /DeviceRGB>>}
 \documentclass[10pt, xcolor={usenames, dvipsnames}]{beamer}
 
-%\PassOptionsToPackage{cmyk}{xcolor}
-%\usepackage[cmyk]{xcolor}
-%\documentclass[handout, 10pt, xcolor={usenames, dvipsnames}]{beamer}
-
-%\usepackage{etex}
 \usepackage[french, english]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{upgreek,textgreek}
-%\usepackage{textcomp}
 \usepackage{animate}
 
 \usepackage{pifont}
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
 
-%\usepackage{amsfonts}
 \usepackage{amsmath}
 \usepackage{amssymb}
-%\usepackage{mathtools}
 
 \usepackage{graphicx}
 \usepackage{hyperref}
@@ -63,7 +55,9 @@
 \usepackage{epstopdf}
 \usepackage{epsfig}
 
+
 \newcommand{\REF}{\textcolor{purple}{REF}}
+\newcommand{\GO}[1]{\textcolor{blue}{#1}}
 \newcommand{\YES}[1]{\textcolor{green}{#1}}
 \newcommand{\NO}[1]{\textcolor{red}{#1}}
 
@@ -86,20 +80,205 @@
   distributed data stores.
 \end{frame}
 
-\begin{frame}{Large scale static systems: \YES{}}
+\begin{frame}{Static systems: \YES{\cmark}}
+  
+  Simply broadcast and forward each message exactly once using all outgoing
+  links and you have causal broadcast.
+
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part A][\label{fig:generalsolveA}Process~A broadcasts $a$.]
+      \input{input/figgeneralsolveA.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
+      % delivers $a$. Process~B forwards $a$ using its FIFO links.]
+      \input{input/figgeneralsolveB.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part C][\label{fig:generalsolveC}Process~B broadcasts $b$.]
+      \input{input/figgeneralsolveC.tex}
+    \end{center}
+  \end{minipage}
+  
+  \begin{center}
+  \begin{minipage}{0.35\textwidth}
+    \begin{center}
+    % \subfloat[Part D][\label{fig:generalsolveD}Process~A receives and 
+    % delivers $b$. Process~A forwards $b$ using its FIFO links.]
+      \input{input/figgeneralsolveD.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.35\textwidth}
+    \begin{center}
+    % \hspace{40pt}
+    % \subfloat[Part E][\label{fig:generalsolveE}Process~C cannot receive $b$
+    % without having received $a$ beforehand.]
+      \input{input/figgeneralsolveE.tex}
+    % \caption{\label{fig:generalsolve}Causal broadcast~\cite{friedman2004causal}
+    %   ensures causal order.}
+    \end{center}
+  \end{minipage}
+\end{center}
+
+Propagation ensures causal order by design. It is very efficient for message
+overhead remains constant $O(1)$.
+
 \end{frame}
 
-\begin{frame}{But dynamic systems: \NO{}}
+\begin{frame}{Large scale static systems: \YES{\cmark}}
+
+  Each process has a partial view much smaller than the actual system size and
+  efficiently propagates messages using gossiping.
+
+  \begin{center}
+    \input{input/figdisseminationtree.tex}
+  \end{center}
+
+  Gossiping is already mandatory for large scale systems. It is not an
+  additional overhead of causal broadcast.
+
 \end{frame}
 
-\begin{frame}{Problem}
-  Keeping the complexity of large scale static systems in dynamic settings where
-  processes can join, leave, or self-reconfigure at any time
+
+
+\begin{frame}{But dynamic systems: \NO{\xmark}}
+
+  New links may act as shortcut for new messages impairing causal order.
+
+\begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part A][\label{fig:generalsolveA}Process~A broadcasts $a$.]
+      \input{input/figpreventiveproblemA.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
+      % delivers $a$. Process~B forwards $a$ using its FIFO links.]
+      \input{input/figpreventiveproblemA2.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part C][\label{fig:generalsolveC}Process~B broadcasts $b$.]
+      \input{input/figpreventiveproblemB.tex}
+    \end{center}
+  \end{minipage}
+  
+  \begin{center}
+  \begin{minipage}{0.35\textwidth}
+    \begin{center}
+    % \subfloat[Part D][\label{fig:generalsolveD}Process~A receives and 
+    % delivers $b$. Process~A forwards $b$ using its FIFO links.]
+      \input{input/figpreventiveproblemC.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.35\textwidth}
+    \begin{center}
+    % \hspace{40pt}
+    % \subfloat[Part E][\label{fig:generalsolveE}Process~C cannot receive $b$
+    % without having received $a$ beforehand.]
+      \input{input/figpreventiveproblemD.tex}
+    % \caption{\label{fig:generalsolve}Causal broadcast~\cite{friedman2004causal}
+    %   ensures causal order.}
+    \end{center}
+  \end{minipage}
+  \end{center}  
+
+  Not only Process~D fails to deliver messages in causal order but propagates the
+  mistake to the rest of processes.
+
 \end{frame}
 
-\begin{frame}{Proposal: PC-broadcast}
-  We define safe links, and processes use all and only safe links for causal broadcast.
+
+\begin{frame}[standout]
+  How do we keep the complexity of causal broadcast for large scale static
+  systems in dynamic settings where processes can join, leave, or
+  self-reconfigure at any time?
 \end{frame}
+
+\begin{frame}{Proposal: PC-broadcast}  
+
+  PC-broadcast stands for Preventive Causal broadcast. It prevents causal order
+  violations by forbidding the usage of new links until proven safe. Each
+  process uses all and only safe links for causal broadcast.
+  
+  
+  \begin{definition}[\label{def:safe}Safe link]
+    A link from Process~A to Process~B is safe if and only if Process~B received
+    or will receive all messages delivered by Process~A before receiving any
+    message that Process~A will deliver:
+    $safe_{AB} \equiv \forall m,\, m',\, d_A(m) \rightarrow s_{AB}(m') \implies
+    r_B(m) \rightarrow r_{BA}(m')$
+  \end{definition}
+
+  Links start unsafe. The challenge is to make links safe using local knowledge
+  only. Sending all delivered messages since the beginning makes safe links but
+  is over-expansive: \NO{\xmark}. We will use few lightweight control messages
+  that follow causal order: \YES{\cmark}.
+
+\end{frame}
+
+
+\begin{frame}{Control messages and buffering make safe links}
+  
+  \begin{enumerate}
+  \item Sending a control message using safe link to the other process
+    $\rightarrow$ will acknowledge the delivery of most of past messages
+  \item Buffer all delivered messages $\rightarrow$ saves concurrent messages to
+    safe link establishment
+  \item Upon acknowledgment of the control message, send the buffer of
+    concurrent messages
+  \end{enumerate}
+
+
+\begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part A][\label{fig:generalsolveA}Process~A broadcasts $a$.]
+      \input{input/figpreventivesolveA.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
+      % delivers $a$. Process~B forwards $a$ using its FIFO links.]
+      \input{input/figpreventivesolveB.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part C][\label{fig:generalsolveC}Process~B broadcasts $b$.]
+      \input{input/figpreventivesolveC.tex}
+    \end{center}
+  \end{minipage}
+  
+  \begin{center}
+  \begin{minipage}{0.35\textwidth}
+    \begin{center}
+    % \subfloat[Part D][\label{fig:generalsolveD}Process~A receives and 
+    % delivers $b$. Process~A forwards $b$ using its FIFO links.]
+      \input{input/figpreventivesolveD.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.35\textwidth}
+    \begin{center}
+    % \hspace{40pt}
+    % \subfloat[Part E][\label{fig:generalsolveE}Process~C cannot receive $b$
+    % without having received $a$ beforehand.]
+      \input{input/figpreventivesolveE.tex}
+    % \caption{\label{fig:generalsolve}Causal broadcast~\cite{friedman2004causal}
+    %   ensures causal order.}
+    \end{center}
+  \end{minipage}
+  \end{center}    
+
+\end{frame}
+
 
 \begin{frame}{Network conditions may lead to unbounded space consumption}
 \end{frame}
@@ -111,6 +290,10 @@
 \end{frame}
 
 \begin{frame}{Conclusion}
+\end{frame}
+
+\begin{frame}{To be continued\ldots}
+  Removing the last monotonic upper bound on space complexity
 \end{frame}
 
 \end{document}

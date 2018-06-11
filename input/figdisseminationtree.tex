@@ -1,0 +1,41 @@
+
+\begin{tikzpicture}[scale=0.65]
+
+  \small
+  
+  \newcommand\X{210/5pt};
+  \newcommand\Y{30pt};
+  
+  \draw[->] ( -1*\X, 1*\Y) -- ( -5+0*\X, 0*\Y);
+  \draw[->] ( -1*\X, 0*\Y) node[anchor=east, align=center]{Rest\\of the\\network} -- ( -5+0*\X, 0*\Y);
+  \draw[->] ( -1*\X, -1*\Y) -- ( -5+0*\X, 0*\Y);
+
+  \draw[<-] ( 5*\X, 1*\Y) -- ( 5+4*\X, 0*\Y);
+  \draw[<-] ( 5*\X, 0*\Y) node[anchor=west, align=center]{Rest\\of the\\network}-- ( 5+4*\X, 0*\Y);
+  \draw[<-] ( 5*\X, -1*\Y) -- ( 5+4*\X, 0*\Y);
+
+
+  \draw[fill=white] (0*\X, 0*\Y) node{\textbf{A}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+
+  \draw[fill=white] (1*\X, -1*\Y) node{\textbf{B}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+
+  \draw[fill=white] (2*\X, -2*\Y) node{\textbf{E}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+  \draw[fill=white] (2*\X,  0*\Y) node{\textbf{D}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+  \draw[fill=white] (2*\X,  2*\Y) node{\textbf{C}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+
+  \draw[fill=white] (4*\X, 0*\Y) node{\textbf{F}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+
+  \draw[->](5+0*\X, 0*\Y) -- node[sloped, above]{\GO{\pmb{$a'\,a$}}} (-5+2*\X,  2*\Y); %% A->E
+  \draw[->](5+0*\X, 0*\Y) -- node[sloped, above]{\GO{\pmb{$a'\,a$}}} (-5+1*\X, -1*\Y); %% A->B
+
+  \draw[->](5+1*\X, -1*\Y) -- node[sloped, above]{$\pmb{a'}\,b\,\pmb{a}$} (-5+2*\X, 0*\Y); %% B->D
+  \draw[->](5+1*\X, -1*\Y) -- node[sloped, above]{$\pmb{a'}\,b\,\pmb{a}$} (-5+2*\X, -2*\Y); %% B->C
+
+  \draw[->](5+2*\X,  2*\Y) -- node[sloped, above]{$c\,\GO{\pmb{a'\,a}}$} (-5+4*\X, 0*\Y); %% E->F
+  \draw[->](5+2*\X,  0*\Y) -- node[sloped, above]{$\GO{\pmb{a'}}\,b\,\GO{\pmb{a}}\,d$} (-5+4*\X, 0*\Y); %% D->F
+  \draw[->](5+2*\X, -2*\Y) -- node[sloped, above]{$\GO{\pmb{a'}}\,b\,\,e'\,e\,\GO{\pmb{a}}$} (-5+4*\X, 0*\Y); %% C->F
+
+  
+
+
+\end{tikzpicture}
