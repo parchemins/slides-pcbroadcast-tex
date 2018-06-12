@@ -20,7 +20,7 @@
 \bibliography{bibliographie}
 \renewcommand*{\bibfont}{\small}
 
-
+\usepackage{makecell}
 \usepackage{tabularx, booktabs}
 \usepackage{tikz}
 \definecolor{light-gray}{gray}{0.65}
@@ -79,14 +79,20 @@
   distributed social networks, distributed collaborative softwares, or
   distributed data stores.
 
-  When Alice comments Bob's picture, everyone sees Alice's comment after
-  Bob's picture.
+  \vspace{2em}
+  
+  If the sending of a message $m$ precedes the sending of a message $m'$ then
+  all processes that deliver these two messages need to deliver $m$ before
+  $m'$. Otherwise they can deliver them in any order.
+
+  \textit{When Alice comments Bob's picture, everyone sees Alice's comment after
+    Bob's picture.}
 \end{frame}
 
 \begin{frame}{Static systems: \YES{\cmark}}
   
   Simply broadcast and forward each message exactly once using all outgoing
-  links and you have causal broadcast.
+  FIFO links and you have causal broadcast.
 
   \begin{minipage}{0.32\textwidth}
     \begin{center}
@@ -153,13 +159,15 @@ overhead remains constant $O(1)$.
 
   New links may act as shortcut for new messages impairing causal order.
 
-\begin{minipage}{0.32\textwidth}
+  \begin{minipage}{0.32\textwidth}
+    \vspace{1pt}
     \begin{center}
       % \subfloat[Part A][\label{fig:generalsolveA}Process~A broadcasts $a$.]
       \input{input/figpreventiveproblemA.tex}
     \end{center}
   \end{minipage}
   \begin{minipage}{0.32\textwidth}
+    \vspace{1pt}
     \begin{center}
       % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
       % delivers $a$. Process~B forwards $a$ using its FIFO links.]
@@ -199,6 +207,28 @@ overhead remains constant $O(1)$.
 \end{frame}
 
 
+\begin{frame}{Positioning}
+  
+  \begin{center}
+  \begin{table}
+    \begin{center}
+      \caption{\label{table:comparison} Complexity of causal
+        broadcast protocols.
+        $N$ is the number of processes that ever broadcast a message.
+        $W$ is the number of received messages awaiting delivery.
+        $P$ is the number of delivered messages that are temporarily kept before
+        being safely purged to forbid double delivery.%
+        % $B$ is the number of delivered messages that are temporarily kept to
+        % check the safety of new communication means.
+      }
+      \input{input/tableoverlayvstimestamp.tex}
+    \end{center}
+  \end{table}
+  \end{center}
+
+\end{frame}
+
+
 \begin{frame}[standout]
   How do we keep the complexity of causal broadcast for large scale static
   systems in dynamic settings where processes can join, leave, or
@@ -211,7 +241,10 @@ overhead remains constant $O(1)$.
   violations by forbidding the usage of new links until proven safe. Each
   process uses all and only safe links for causal broadcast.
   
-  
+\end{frame}
+
+\begin{frame}{Safe links}
+
   \begin{definition}[\label{def:safe}Safe link]
     A link from Process~A to Process~B is safe if and only if Process~B received
     or will receive all messages delivered by Process~A before receiving any
@@ -219,6 +252,8 @@ overhead remains constant $O(1)$.
     $safe_{AB} \equiv \forall m,\, m',\, d_A(m) \rightarrow s_{AB}(m') \implies
     r_B(m) \rightarrow r_{BA}(m')$
   \end{definition}
+
+  \vspace{2em}
 
   Links start unsafe. The challenge is to make links safe using local knowledge
   only. Sending all delivered messages since the beginning makes safe links but
