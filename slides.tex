@@ -78,6 +78,9 @@
   Causal broadcast is the core of many distributed applications such as
   distributed social networks, distributed collaborative softwares, or
   distributed data stores.
+
+  When Alice comments Bob's picture, everyone sees Alice's comment after
+  Bob's picture.
 \end{frame}
 
 \begin{frame}{Static systems: \YES{\cmark}}
@@ -238,6 +241,7 @@ overhead remains constant $O(1)$.
 
 
   \begin{minipage}{0.32\textwidth}
+    \vspace{4pt}
     \begin{center}
       % \subfloat[Part A][\label{fig:generalsolveA}Process~A broadcasts $a$.]
       \input{input/figpreventivesolveA.tex}
@@ -267,6 +271,7 @@ overhead remains constant $O(1)$.
   \end{minipage}
   \begin{minipage}{0.35\textwidth}
     \begin{center}
+    \vspace{9pt}
     % \hspace{40pt}
     % \subfloat[Part E][\label{fig:generalsolveE}Process~C cannot receive $b$
     % without having received $a$ beforehand.]
@@ -313,12 +318,14 @@ overhead remains constant $O(1)$.
   Above a buffer size threshold, retry. Too many tries, abort.
 
   \begin{minipage}{0.32\textwidth}
+    \vspace{16pt}
     \begin{center}
       % \subfloat[Part A][\label{fig:generalsolveA}Process~A broadcasts $a$.]
       \input{input/figbuffersolveA.tex}
     \end{center}
   \end{minipage}
   \begin{minipage}{0.32\textwidth}
+    \vspace{12pt}
     \begin{center}
       % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
       % delivers $a$. Process~B forwards $a$ using its FIFO links.]
@@ -341,6 +348,7 @@ overhead remains constant $O(1)$.
     \end{center}
   \end{minipage}
   \begin{minipage}{0.35\textwidth}
+  \vspace{20pt}
     \begin{center}
     % \hspace{40pt}
     % \subfloat[Part E][\label{fig:generalsolveE}Process~C cannot receive $b$
