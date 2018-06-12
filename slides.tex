@@ -7,6 +7,8 @@
 \usepackage{upgreek,textgreek}
 \usepackage{animate}
 
+\usepackage{fnpct}
+
 \usepackage{pifont}
 \newcommand{\cmark}{\ding{51}}
 \newcommand{\xmark}{\ding{55}}
@@ -18,7 +20,7 @@
 \usepackage{hyperref}
 \usepackage[style=alphabetic, autocite=inline, firstinits=true, maxnames=2]{biblatex}
 \bibliography{bibliographie}
-\renewcommand*{\bibfont}{\small}
+%\renewcommand*{\bibfont}{\small}
 
 \usepackage{makecell}
 \usepackage{tabularx, booktabs}
@@ -75,24 +77,65 @@
 \maketitle
 
 \begin{frame}{Introduction}
+
   Causal broadcast is the core of many distributed applications such as
   distributed social networks, distributed collaborative softwares, or
   distributed data stores.
 
-  \vspace{2em}
+  \vspace{3em}
   
-  If the sending of a message $m$ precedes the sending of a message $m'$ then
-  all processes that deliver these two messages need to deliver $m$ before
-  $m'$. Otherwise they can deliver them in any order.
+    \begin{minipage}{0.24\textwidth}
+      \centering
+      \includegraphics[width=0.5\textwidth]{logos/facebook.png}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+      \centering
+      \includegraphics[width=0.5\textwidth]{logos/mastodon.png}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+      \centering
+      \includegraphics[width=0.5\textwidth]{logos/google.png}
+    \end{minipage}
+    \begin{minipage}{0.24\textwidth}
+      \centering
+      \includegraphics[width=0.7\textwidth]{logos/riak.png}
+    \end{minipage}
+
+\end{frame}
+
+
+\begin{frame}{Causal broadcast}
+
+  Causal broadcast is a reliable broadcast that ensures a specific ordering
+  among message deliveries. 
+  
+  \begin{definition}[Lamport's Happen before]
+    Happen before is a transitive, irreflexive, and antisymmetric relation
+    $\rightarrow$ that defines a strict partial orders of events.  The sending
+    of a message always precedes its receipt.
+  \end{definition}
+
+  \vspace{2em}
+
+  \begin{definition}[Causal order]
+    The delivery order of messages follows the happen before relationships of the
+    corresponding broadcasts. $\forall A,\,B,\,C,\,
+    b_A(m) \rightarrow b_B(m') \implies d_C(m) \rightarrow d_C(m')$
+  \end{definition}
 
   \textit{When Alice comments Bob's picture, everyone sees Alice's comment after
-    Bob's picture.}
+    Bob's picture.}  
+
 \end{frame}
+
 
 \begin{frame}{Static systems: \YES{\cmark}}
   
-  Simply broadcast and forward each message exactly once using all outgoing
-  FIFO links and you have causal broadcast.
+  \vspace{2em}
+  
+  Simply broadcast and forward each message exactly once using all outgoing FIFO
+  links and you have causal broadcast\footnote{Friedman et al. Causal ordering
+    in deterministic overlay networks.}.
 
   \begin{minipage}{0.32\textwidth}
     \begin{center}
@@ -132,10 +175,12 @@
     %   ensures causal order.}
     \end{center}
   \end{minipage}
-\end{center}
+  \end{center}
 
-Propagation ensures causal order by design. It is very efficient, for message
-overhead remains constant $O(1)$.
+  Propagation ensures causal order by design. It is very efficient, for message
+  overhead remains constant $O(1)$.
+
+  \vspace{2em}
 
 \end{frame}
 
