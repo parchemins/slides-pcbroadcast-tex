@@ -350,7 +350,10 @@ overhead remains constant $O(1)$.
 
 \begin{frame}{Handling failures}
 
-  Above a buffer size threshold, retry. Too many tries, abort.
+  \begin{enumerate}
+  \item Above a buffer size threshold, retry.
+  \item Too many attempts, abort.
+  \end{enumerate}
 
   \begin{minipage}{0.32\textwidth}
     \vspace{16pt}
@@ -399,20 +402,52 @@ overhead remains constant $O(1)$.
 
 \begin{frame}{Experimentation: small negative impact on the overlay}
 
+  \small The overlay network is built using a random peer-sampling protocol. Processes
+  periodically exchange outgoing links. Links are bidirectional. Each new safe
+  link costs 3 control messages.
+
+  \vspace{-5pt}
+
   \begin{center}
-    \includegraphics[width=0.8\textwidth]{img/delay.eps}
+    \includegraphics[width=0.7\textwidth]{img/delay.eps}
   \end{center}
+  
+  \vspace{-5pt}
+
+  \small Messages arrive slightly later, for PC-broadcast temporarily forbids the use
+  of new links. This is overlay-specific: removing an arc from a random-graph is
+  not very impactful.
 
 \end{frame}
 
 \begin{frame}{Conclusion}
   
-  PC-broadcast constitutes a simple solution for causal broadcast.
+  PC-broadcast constitutes a simple and efficient implementation for causal broadcast
+  in large and dynamic systems.
+
+  Depending on the overlay network, the cost in terms of number of control
+  messages and its negative impact on overlay's property remains low.
+
+  \vspace{2em}
+
+  \begin{center}
+  \begin{table}
+    \begin{center}
+      \input{input/tablelineourapproach.tex}
+    \end{center}
+  \end{table}
+  \end{center}
+
 
 \end{frame}
 
 \begin{frame}[standout]
   To be continued\ldots Removing the last monotonic upper bound on space complexity.
 \end{frame}
+
+\begin{frame}[standout]
+  To be continued 2\ldots Retrieving partial order out of flattened orders.
+\end{frame}
+
 
 \end{document}
