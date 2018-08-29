@@ -1,0 +1,26 @@
+
+\begin{tikzpicture}[scale=1]
+
+%\normal
+
+\newcommand\Y{-25pt};
+\newcommand\X{25pt};
+  
+\draw[fill=black] (0, 0*\Y) node[left]{\footnotesize$a$} circle (1pt);
+\draw[->](0*\X, 0*\Y) -- (0, 1*\Y);
+\draw[fill=black] (0, 1*\Y) node[left]{\footnotesize$b$} circle (1pt);
+\draw[->](0, 1*\Y) -- (0, 2*\Y);
+\draw[fill=black] (0, 2*\Y) node[left]{\footnotesize$a'$} circle (1pt);
+
+\draw[->] ( 1*\X, 1*\Y) -- ( 2*\X, 1*\Y);
+
+\draw[fill=black] (3*\X, 0*\Y) node[left]{\footnotesize$a$} circle (1pt);
+\draw[->](3*\X, 0*\Y) -- (3*\X, 1*\Y);
+\draw[fill=black] (3*\X, 1*\Y) node[left]{\footnotesize$b$} circle (1pt);
+\draw[->](3*\X, 0*\Y) -- (4*\X, 1*\Y);
+\draw[fill=black] (4*\X, 1*\Y) node[right]{\footnotesize$a'$} circle (1pt);
+
+
+
+
+\end{tikzpicture}

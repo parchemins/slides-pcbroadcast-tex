@@ -461,6 +461,37 @@
 
 \end{frame}
 
+
+\begin{frame}{Traffic overhead depends on routing capabilities}
+  
+  % \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
+      % delivers $a$. Process~B forwards $a$ using its FIFO links.]
+      \input{input/figpreventivesolveB.tex}
+    \end{center}
+    % \end{minipage}
+  
+  \vspace{2em}
+  
+  Control messages $\pi$ travels in the system from Process~A to Process~C. The
+  number of intermediate processes that forward $\pi$ depends on their available
+  knowledge.
+
+  \vspace{2em}
+
+  \begin{center}
+    \begin{table}
+      \begin{center}
+        \input{input/tableoverhead.tex}
+      \end{center}
+    \end{table}
+  \end{center}
+
+
+\end{frame}
+
+
 \begin{frame}{Experimentation: small negative impact on the overlay}
 
   \small The overlay network is built using a random peer-sampling protocol. Processes
@@ -503,11 +534,30 @@
 \end{frame}
 
 \begin{frame}[standout]
-  To be continued\ldots Removing the last monotonic upper bound on space complexity.
+  To be continued\ldots Removing the last monotonic upper bound on space complexity.  
+  
+  \vspace{2em}
+  
+  \small 
+  \begin{table}
+    \begin{tabularx}{0.312\columnwidth}{@{}c@{}}
+      local space consumption \\
+      \hline\hline
+      $O(\NO{N}) \rightarrow O(?)$
+    \end{tabularx}
+  \end{table}
+  
 \end{frame}
 
 \begin{frame}[standout]
   To be continued 2\ldots Retrieving partial order out of flattened orders.
+
+  \vspace{2em}
+
+  \begin{center}
+    \input{input/figflattened.tex}
+  \end{center}
+
 \end{frame}
 
 

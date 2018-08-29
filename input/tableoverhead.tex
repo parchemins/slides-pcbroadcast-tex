@@ -1,0 +1,18 @@
+%\setlength{\tabcolsep}{3pt} % General space between cols (6pt standard)
+\footnotesize
+
+\begin{tabularx}{0.95\columnwidth}{@{}Xc@{}}
+%  \toprule
+  & \makecell{number of control messages\\per new link} \\
+  \hline\hline
+%  objective & \cmark & $?<O(N)$ & $O(N)\leq \, ?$ & $? \leq O(W.N)$ \\ \hline\hline
+  \textbf{neighbor-to-neighbor connection (gossip)} & $3$ \\ 
+  \textbf{routing (DHT)} & $O(3 \cdot \log P)$  \\
+  \textbf{worst-case (broadcast)} & $O(\NO{ 3 \cdot P^2})$ 
+%  \bottomrule
+\end{tabularx}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../paper"
+%%% End:
