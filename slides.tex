@@ -147,7 +147,40 @@
 \end{frame}
 
 
-\begin{frame}{Static systems: \YES{\cmark}}
+\begin{frame}{A. Large scale systems: \NO{\xmark}}
+
+  Piggybacking a vector of Lamport's clocks allows processes to order message
+  deliveries.
+
+  \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      \input{input/figvectorA.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \vspace{1.35em}
+    \begin{center}
+      \input{input/figvectorB.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.32\textwidth}
+    \vspace{1.35em}
+    \begin{center}
+      \input{input/figvectorC.tex}
+    \end{center}
+  \end{minipage}
+
+  
+  \vspace{1em}
+
+  However, the size of vectors increases linearly and monotonically with the
+  number of processes that ever broadcast a message. It does not scale in large
+  systems.
+
+\end{frame}
+
+
+\begin{frame}{B. Static systems: \YES{\cmark}}
   
   \vspace{2em}
   
@@ -202,7 +235,7 @@
 
 \end{frame}
 
-\begin{frame}{Large scale static systems: \YES{\cmark}}
+\begin{frame}{B. Large scale static systems: \YES{\cmark}}
 
   Each process has a partial view much smaller than the actual system size and
   efficiently propagates messages using gossiping.
@@ -218,7 +251,7 @@
 
 
 
-\begin{frame}{But dynamic systems: \NO{\xmark}}
+\begin{frame}{B. But dynamic systems: \NO{\xmark}}
 
   New links may act as shortcut for new messages impairing causal order.
 
@@ -300,7 +333,11 @@
 
 \begin{frame}{Proposal: PC-broadcast}  
 
-  PC-broadcast stands for Preventive Causal broadcast. It prevents causal order
+  PC-broadcast stands for Preventive Causal broadcast. 
+
+  \vspace{2em}
+
+  PC-broadcast prevents causal order
   violations by forbidding the usage of new links until proven safe. Each
   process uses all and only safe links for causal broadcast.
   
@@ -478,7 +515,7 @@
   
   The control message $\pi$ travels in the system from Process~A to
   Process~C. The number of intermediate processes that forward $\pi$ depends on
-  their available knowledge.
+  their available knowledge of the system topology.
 
   \vspace{2em}
 
@@ -498,7 +535,7 @@
 
   \small The overlay network is built using a random peer-sampling protocol. Processes
   periodically exchange outgoing links. Links are bidirectional. Each new safe
-  link costs 3 control messages.
+  bidirectional link costs 6 control messages.
 
   \vspace{-5pt}
 

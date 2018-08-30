@@ -1,0 +1,33 @@
+
+\begin{tikzpicture}[scale=1]
+  
+  \small
+  
+  \newcommand\X{210/5pt};
+  \newcommand\Y{30pt};
+  
+  % \draw[->] ( -0.5*\X, 0.5*\Y) -- ( -5+0*\X, 0*\Y);
+  % \draw[->] ( -0.5*\X, 0*\Y) -- ( -5+0*\X, 0*\Y);
+  % \draw[->] ( -0.5*\X, -0.5*\Y) -- ( -5+0*\X, 0*\Y);  
+
+  \draw[fill=white] (0*\X, 0*\Y) node{\textbf{A}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+  \draw (0*\X, 5+0*\Y) node[above]{$[1]$};
+  \draw[fill=white] (1*\X, -1*\Y) node{\GO{\textbf{B}}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+  \draw (1*\X, 5-1*\Y) node[above]{$a$};
+  \draw (1*\X, -5-1*\Y) node[below]{\GO{$[1]$}};
+
+
+  \draw[fill=white] (2*\X,  0*\Y) node{\textbf{C}} +(-5pt, -5pt) rectangle +(5pt, 5pt);
+
+
+  \draw[->](5+0*\X, 0*\Y) -- (-5+1*\X, -1*\Y); %% A->B
+  \draw[<-](5+0*\X, -5+0*\Y) -- (-5+1*\X, -5-1*\Y); %% A<-B
+
+  \draw[->](5+0*\X, 5+0*\Y) node[above right]{~ ~ ~ ~$[1]a$} --  (-5+2*\X, 5+0*\Y); % A->C
+  \draw[<-](5+0*\X,  1.25+ 0*\Y) -- (-5+2*\X,  1.25+ 0*\Y); % A<-C
+ 
+  \draw[<-](5+1*\X, -1*\Y) -- (-5+2*\X, 0*\Y); %% B<-C
+  \draw[->](5+1*\X, -5-1*\Y) -- (-5+2*\X, -5+0*\Y); %% B->C
+
+  % \draw[->](5+2*\X, 0*\Y) -- ( 2.5*\X, 0*\Y);
+\end{tikzpicture}

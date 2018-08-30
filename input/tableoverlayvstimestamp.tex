@@ -1,10 +1,10 @@
 %\setlength{\tabcolsep}{3pt} % General space between cols (6pt standard)
 \small
-\begin{tabularx}{0.95\columnwidth}{@{}Xcccc@{}}
+\begin{tabularx}{0.98\columnwidth}{@{}Xcccc@{}}
 %  \toprule
   & \makecell{dynamic\\systems} & \makecell{message\\overhead} & \makecell{local space\\consumption} &  \makecell{delivery\\execution time} \\ \cmidrule{2-5}
-  vector-based & \YES{\cmark} & $O(\NO{N})$ & $O(\NO{N}+W\cdot\NO{N})$ & $O(W\cdot\NO{N})$ \\
-  FIFO+forward & \NO{\xmark} & $O(1)$ & $O(P)$ & $O(1)$ \\ \hline\hline
+  A. vector-based & \YES{\cmark} & $O(\NO{N})$ & $O(\NO{N}+W\cdot\NO{N})$ & $O(W\cdot\NO{N})$ \\
+  B. FIFO+forward & \NO{\xmark} & $O(1)$ & $O(P)$ & $O(1)$ \\ \hline\hline
 %  objective & \cmark & $?<O(N)$ & $O(N)\leq \, ?$ & $? \leq O(W.N)$ \\ \hline\hline
   \textbf{our approach} & \textbf{\YES{\cmark}} & $\mathbf{O(1)}$ & $\mathbf{O(\NO{N})}$ & $\mathbf{O(1)}$ \\ 
 %  \bottomrule
