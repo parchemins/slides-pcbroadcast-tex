@@ -127,10 +127,10 @@
   Causal broadcast is a reliable broadcast that ensures a specific ordering
   among message deliveries. 
   
-  \begin{definition}[Lamport's Happen before]
+  \begin{definition}[Lamport's happen before]
     Happen before is a transitive, irreflexive, and antisymmetric relation
     $\rightarrow$ that defines a strict partial orders of events.  The sending
-    of a message always precedes its receipt.
+    of a message always precedes its receipt: $s(m) \rightarrow r(m)$.
   \end{definition}
 
   \vspace{2em}
@@ -326,14 +326,23 @@
 
 
 \begin{frame}[standout]
-  How do we keep the complexity of causal broadcast for large scale static
-  systems in dynamic settings where processes can join, leave, or
-  self-reconfigure at any time?
+  % How do we keep the complexity of causal broadcast for large scale static
+  % systems in dynamic settings where processes can join, leave, or
+  % self-reconfigure at any time?
+  How do we manage to causal broadcast\\
+  (i) in large scale systems comprising
+  from hundreds to millions of processes\\
+  (ii) in dynamic settings where any process can join, leave,
+  self-reconfigure, or crash at any time?
 \end{frame}
 
 \begin{frame}{Proposal: PC-broadcast}  
 
   PC-broadcast stands for Preventive Causal broadcast. 
+
+  \vspace{2em}
+
+  PC-broadcast uses FIFO links and forwarding.
 
   \vspace{2em}
 
@@ -353,7 +362,16 @@
     r_B(m) \rightarrow r_{BA}(m')$
   \end{definition}
 
-  \vspace{2em}
+
+  % \begin{minipage}{0.32\textwidth}
+    \begin{center}
+      % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
+      % delivers $a$. Process~B forwards $a$ using its FIFO links.]
+      \input{input/figsafeexplanation.tex}
+    \end{center}
+    % \end{minipage}
+
+    %\vspace{2em}
 
   Links start unsafe. The challenge is to make links safe using local knowledge
   only. Sending all delivered messages since the beginning makes safe links but
@@ -371,7 +389,7 @@
   \item Buffer all delivered messages $\rightarrow$ saves concurrent messages to
     safe link establishment
   \item Upon acknowledgment of the control message, send the buffer of
-    concurrent messages
+    concurrent messages $\rightarrow$ the new link is safe
   \end{enumerate}
 
 
@@ -426,17 +444,17 @@
     \begin{center}
       % \subfloat[Part B][\label{fig:generalsolveB}Process~B receives and 
       % delivers $a$. Process~B forwards $a$ using its FIFO links.]
-      \input{input/figpreventivesolveB.tex}
+      \input{input/figcontrolmessages.tex}
     \end{center}
     % \end{minipage}
   
-  \vspace{2em}
+  \vspace{1em}
   
   The control message $\pi$ travels in the system from Process~A to
   Process~C. The number of intermediate processes that forward $\pi$ depends on
   their available knowledge of the system topology.
 
-  \vspace{2em}
+  \vspace{1em}
 
   \begin{center}
     \begin{table}
@@ -556,11 +574,7 @@
 
 \begin{frame}{Conclusion}
   
-  PC-broadcast constitutes a simple and efficient implementation for causal broadcast
-  in large and dynamic systems.
-
-  Depending on the overlay network, the cost in terms of number of control
-  messages and its negative impact on overlay's properties remains low.
+  PC-broadcast enables causal broadcast in large and dynamic systems.
 
   \vspace{2em}
 
