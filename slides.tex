@@ -39,6 +39,8 @@
   },
 }
 
+\setbeamercovered{transparent}
+
 \usetikzlibrary{plotmarks,shapes}
 \usepackage{colortbl}
 \usepackage{ulem}
@@ -119,6 +121,10 @@
       \includegraphics[width=0.8\textwidth]{logos/riak.png}
     \end{minipage}
 
+    \vspace{2em}
+
+    Causal broadcast for fully decentralized applications?
+
 \end{frame}
 
 
@@ -143,44 +149,75 @@
 
   \textit{When Alice comments on Bob's picture, everyone sees Alice's comment
     after Bob's picture.}
+  
+\end{frame}
+
+
+\begin{frame}[standout]
+  % How do we keep the complexity of causal broadcast for large scale static
+  % systems in dynamic settings where processes can join, leave, or
+  % self-reconfigure at any time?
+  How do we manage to causal broadcast\\
+  (i) in large scale systems comprising
+  from hundreds to millions of processes\\
+  (ii) in dynamic settings where any process can join, leave,
+  self-reconfigure, or crash at any time?
+
+  \vspace{2em}
+  
+  \input{input/tableoverlayvstimestampprogressive.tex}
 
 \end{frame}
 
 
-\begin{frame}{A. Large scale systems: \NO{\xmark}}
+\begin{frame}{Proposal: PC-broadcast}  
 
-  Piggybacking a vector of Lamport's clocks allows processes to order message
-  deliveries.
+  PC-broadcast belongs to topology-based approaches. It enables causal broadcast
+  in large scale systems.
 
-  \begin{minipage}{0.32\textwidth}
-    \begin{center}
-      \input{input/figvectorA.tex}
-    \end{center}
-  \end{minipage}
-  \begin{minipage}{0.32\textwidth}
-    \vspace{1.35em}
-    \begin{center}
-      \input{input/figvectorB.tex}
-    \end{center}
-  \end{minipage}
-  \begin{minipage}{0.32\textwidth}
-    \vspace{1.35em}
-    \begin{center}
-      \input{input/figvectorC.tex}
-    \end{center}
-  \end{minipage}
+  \vspace{2em}
+
+  PC-broadcast stands for Preventive Causal broadcast. PC-broadcast uses all
+  and only communication links that are safe to use. It prevents causal order
+  violations even in dynamic settings.
+
+\end{frame}
+
+
+% \begin{frame}{A. Large scale systems: \NO{\xmark}}
+
+%   Piggybacking a vector of Lamport's clocks allows processes to order message
+%   deliveries.
+
+%   \begin{minipage}{0.32\textwidth}
+%     \begin{center}
+%       \input{input/figvectorA.tex}
+%     \end{center}
+%   \end{minipage}
+%   \begin{minipage}{0.32\textwidth}
+%     \vspace{1.35em}
+%     \begin{center}
+%       \input{input/figvectorB.tex}
+%     \end{center}
+%   \end{minipage}
+%   \begin{minipage}{0.32\textwidth}
+%     \vspace{1.35em}
+%     \begin{center}
+%       \input{input/figvectorC.tex}
+%     \end{center}
+%   \end{minipage}
 
   
-  \vspace{1em}
+%   \vspace{1em}
 
-  However, the size of vectors increases linearly and monotonically with the
-  number of processes that ever broadcast a message. It does not scale in large
-  systems.
+%   However, the size of vectors increases linearly and monotonically with the
+%   number of processes that ever broadcast a message. It does not scale in large
+%   systems.
 
-\end{frame}
+% \end{frame}
 
 
-\begin{frame}{B. Static systems: \YES{\cmark}}
+\begin{frame}{Static systems: \YES{\cmark}}
   
   \vspace{2em}
   
@@ -235,7 +272,7 @@
 
 \end{frame}
 
-\begin{frame}{B. Large scale static systems: \YES{\cmark}}
+\begin{frame}{Large scale static systems: \YES{\cmark}}
 
   Each process has a partial view much smaller than the actual system size and
   efficiently propagates messages using gossiping.
@@ -251,7 +288,7 @@
 
 
 
-\begin{frame}{B. But dynamic systems: \NO{\xmark}}
+\begin{frame}{But dynamic systems: \NO{\xmark}}
 
   New links may act as shortcut for new messages impairing causal order.
 
@@ -303,56 +340,29 @@
 \end{frame}
 
 
-\begin{frame}{Positioning}
+% \begin{frame}{Positioning}
   
-  \begin{center}
-  \begin{table}
-    \begin{center}
-      \caption{\label{table:comparison} Complexity of causal
-        broadcast protocols.
-        $N$ is the number of processes that ever broadcast a message.
-        $W$ is the number of received messages awaiting delivery.
-        $P$ is the number of delivered messages that are temporarily kept before
-        being safely purged to forbid double delivery.%
-        % $B$ is the number of delivered messages that are temporarily kept to
-        % check the safety of new communication means.
-      }
-      \input{input/tableoverlayvstimestamp.tex}
-    \end{center}
-  \end{table}
-  \end{center}
+%   \begin{center}
+%   \begin{table}
+%     \begin{center}
+%       \caption{\label{table:comparison} Complexity of causal
+%         broadcast protocols.
+%         $N$ is the number of processes that ever broadcast a message.
+%         $W$ is the number of received messages awaiting delivery.
+%         $P$ is the number of delivered messages that are temporarily kept before
+%         being safely purged to forbid double delivery.%
+%         % $B$ is the number of delivered messages that are temporarily kept to
+%         % check the safety of new communication means.
+%       }
+% %      \input{input/tableoverlayvstimestamp.tex}
+%     \end{center}
+%   \end{table}
+%   \end{center}
 
-\end{frame}
+% \end{frame}
 
 
-\begin{frame}[standout]
-  % How do we keep the complexity of causal broadcast for large scale static
-  % systems in dynamic settings where processes can join, leave, or
-  % self-reconfigure at any time?
-  How do we manage to causal broadcast\\
-  (i) in large scale systems comprising
-  from hundreds to millions of processes\\
-  (ii) in dynamic settings where any process can join, leave,
-  self-reconfigure, or crash at any time?
-\end{frame}
-
-\begin{frame}{Proposal: PC-broadcast}  
-
-  PC-broadcast stands for Preventive Causal broadcast. 
-
-  \vspace{2em}
-
-  PC-broadcast uses FIFO links and forwarding.
-
-  \vspace{2em}
-
-  PC-broadcast prevents causal order
-  violations by forbidding the usage of new links until proven safe. Each
-  process uses all and only safe links for causal broadcast.
-  
-\end{frame}
-
-\begin{frame}{Safe links}
+\begin{frame}{New links must be safe links}
 
   \begin{definition}[\label{def:safe}Safe link]
     A link from Process~A to Process~B is safe if and only if Process~B received
@@ -552,13 +562,27 @@
 
 
 
+\begin{frame}{Experimentation: in large scale dynamic systems}
+
+  We build an overlay network using a random peer-sampling protocol. The
+  topology has properties close to those of random graphs.
+  
+  \vspace{2em}
+
+  The system is very dynamic. Processes periodically exchange their outgoing links.
+  
+  \vspace{2em}  
+
+  Links are bidirectional. Each new safe bidirectional link costs 6 control
+  messages.
+  
+  \vspace{2em}
+
+  Random peer-sampling very useful in P2P systems. TODO
+
+\end{frame}
+
 \begin{frame}{Experimentation: small negative impact on the overlay}
-
-  \small The overlay network is built using a random peer-sampling protocol. Processes
-  periodically exchange outgoing links. Links are bidirectional. Each new safe
-  bidirectional link costs 6 control messages.
-
-  \vspace{-5pt}
 
   \begin{center}
     \includegraphics[width=0.7\textwidth]{img/delay.eps}
@@ -570,18 +594,23 @@
   of new links. This is overlay-specific: removing an arc from a random-graph is
   not very impactful.
 
+  The overhead remains negligible with realistic latency.
+
 \end{frame}
 
 \begin{frame}{Conclusion}
   
-  PC-broadcast enables causal broadcast in large and dynamic systems.
+  PC-broadcast enables causal broadcast in large and dynamic systems. 
+
+  enable fully decentralized application, P2P etc.
 
   \vspace{2em}
 
   \begin{center}
   \begin{table}
     \begin{center}
-      \input{input/tablelineourapproach.tex}
+      \input{input/tableoverlayvstimestamp.tex}
+      % \input{input/tablelineourapproach.tex}
     \end{center}
   \end{table}
   \end{center}
@@ -590,7 +619,7 @@
 \end{frame}
 
 \begin{frame}[standout]
-  To be continued\ldots Removing the last monotonic upper bound on space complexity.  
+  To be continued\ldots Removing the last linear and monotonically increasing upper bound on space complexity.
   
   \vspace{2em}
   
@@ -606,7 +635,8 @@
 \end{frame}
 
 \begin{frame}[standout]
-  To be continued 2\ldots Retrieving partial order out of flattened orders.
+  To be continued 2\ldots Retrieving concurrency between messages when you only
+  see their causal delivery.
 
   \vspace{2em}
 
