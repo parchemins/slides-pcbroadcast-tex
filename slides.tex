@@ -123,33 +123,48 @@
 
     \vspace{2em}
 
-    Causal broadcast for fully decentralized applications?
+
+    However, causal broadcast is not ready for fully decentralized applications
+    that do not rely on intermediate servers, and where the number of users and
+    their behavior is unknown\ldots
 
 \end{frame}
 
 
 \begin{frame}{Causal broadcast}
 
-  Causal broadcast is a reliable broadcast that ensures a specific ordering
-  among message deliveries. 
+  Causal broadcast is a \textbf{reliable broadcast} that ensures a
+  \textbf{specific ordering} among message deliveries.
   
-  \begin{definition}[Lamport's happen before]
-    Happen before is a transitive, irreflexive, and antisymmetric relation
-    $\rightarrow$ that defines a strict partial orders of events.  The sending
-    of a message always precedes its receipt: $s(m) \rightarrow r(m)$.
-  \end{definition}
+  % \begin{definition}[Lamport's happen before]
+  %   Happen before is a transitive, irreflexive, and antisymmetric relation
+  %   $\rightarrow$ that defines a strict partial orders of events.  The sending
+  %   of a message always precedes its receipt: $s(m) \rightarrow r(m)$.
+  % \end{definition}
 
-  \vspace{2em}
+  \vspace{1em}
 
   \begin{definition}[Causal order]
-    The delivery order of messages follows the happen before relationships of the
+    The delivery order of messages follows Lamport's happen before relationships of the
     corresponding broadcasts. $\forall A,\,B,\,C,\,
     b_A(m) \rightarrow b_B(m') \implies d_C(m) \rightarrow d_C(m')$
   \end{definition}
 
-  \textit{When Alice comments on Bob's picture, everyone sees Alice's comment
-    after Bob's picture.}
+%  \textit{When Alice comments on Bob's picture, everyone sees Alice's comment
+%    after Bob's picture.}
   
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+    \input{input/figtimelineA.tex}
+    \end{center}
+  \end{minipage}
+  \begin{minipage}{0.49\textwidth}
+    \begin{center}
+    \input{input/figtimelineB.tex}
+    \end{center}
+  \end{minipage}
+
+
 \end{frame}
 
 
@@ -563,57 +578,50 @@
 
 
 \begin{frame}{Experimentation: in large scale dynamic systems}
-
-  We build an overlay network using a random peer-sampling protocol. The
-  topology has properties close to those of random graphs.
   
-  \vspace{2em}
+  \textbf{Goal}: show the influence of PC-broadcast on a topology it uses.
+
+  \vspace{3em}
+
+  A random peer-sampling protocol builds the overlay network. The topology has
+  properties close to those of random graphs.
+  
+  \vspace{1em}
 
   The system is very dynamic. Processes periodically exchange their outgoing links.
   
-  \vspace{2em}  
+  \vspace{1em}  
 
   Links are bidirectional. Each new safe bidirectional link costs 6 control
   messages.
   
-  \vspace{2em}
-
-  Random peer-sampling very useful in P2P systems. TODO
-
 \end{frame}
 
 \begin{frame}{Experimentation: small negative impact on the overlay}
 
   \begin{center}
-    \includegraphics[width=0.7\textwidth]{img/delay.eps}
+    \includegraphics[width=1\textwidth]{img/delay.eps}
   \end{center}
-  
-  \vspace{-5pt}
-
-  \small Messages arrive slightly later, for PC-broadcast temporarily forbids the use
-  of new links. This is overlay-specific: removing an arc from a random-graph is
-  not very impactful.
-
-  The overhead remains negligible with realistic latency.
 
 \end{frame}
 
 \begin{frame}{Conclusion}
   
   PC-broadcast enables causal broadcast in large and dynamic systems. 
+  
+  \vspace{1em}
 
-  enable fully decentralized application, P2P etc.
+  Fully decentralized applications can finally afford to use causal broadcast
+  for their operation.
 
-  \vspace{2em}
+  % \vspace{2em}
 
-  \begin{center}
+  % \begin{center} 
   \begin{table}
-    \begin{center}
-      \input{input/tableoverlayvstimestamp.tex}
-      % \input{input/tablelineourapproach.tex}
-    \end{center}
+    \input{input/tableoverlayvstimestamp.tex}
+    % \input{input/tablelineourapproach.tex}
   \end{table}
-  \end{center}
+  % \end{center}
 
 
 \end{frame}
@@ -625,10 +633,10 @@
   
   \small 
   \begin{table}
-    \begin{tabularx}{0.312\columnwidth}{@{}c@{}}
+    \begin{tabularx}{0.67\columnwidth}{@{}c@{}}
       local space consumption \\
       \hline\hline
-      $O(\NO{N}) \rightarrow O(?)$
+      \NO{vector clocks} $O(\NO{N})$ $\rightarrow$ not grow-only structure $O(?)$
     \end{tabularx}
   \end{table}
   

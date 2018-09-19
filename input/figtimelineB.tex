@@ -1,0 +1,24 @@
+
+\begin{tikzpicture}
+
+  \newcommand\X{40pt};
+  \newcommand\Y{-20pt};
+
+  \draw (0*\X, 0*\Y) node[above]{\faMale} circle (2pt);
+  \draw (1*\X, 0*\Y) node[above]{\faFemale} circle (2pt);
+  \draw (2*\X, 0*\Y) node[above]{\faChild}circle (2pt);
+
+  \draw [->] (0*\X, -2+0*\Y) -- (0*\X, 5*\Y);
+  \draw [->] (1*\X, -2+0*\Y) -- (1*\X, 5*\Y);
+  \draw [->] (2*\X, -2+0*\Y) -- (2*\X, 5*\Y);
+
+  \draw [->] (0*\X, 0.5*\Y) node[left]{\faImage} -- (1*\X, 1.5*\Y); %% A B
+  \draw [->] (0*\X, 0.5*\Y) -- (2*\X, 4.5*\Y); %% A C
+
+  \draw [->] (1*\X, 2*\Y) node[above right]{\faCommentingO} -- (2*\X, 3.5*\Y); %% B C
+  \draw [->] (1*\X, 2*\Y) -- (0*\X, 3.5*\Y); %% B A
+
+  \draw (2*\X, 4*\Y) node[right]{\NO{\xmark}};
+
+
+\end{tikzpicture}
