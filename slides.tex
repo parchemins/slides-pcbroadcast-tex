@@ -121,12 +121,14 @@
       \includegraphics[width=0.8\textwidth]{logos/riak.png}
     \end{minipage}
 
-    \vspace{2em}
+    \vspace{4em}
 
 
-    However, causal broadcast is not ready for fully decentralized applications
-    that do not rely on intermediate servers, and where the number of users and
-    their behavior is unknown\ldots
+    % However, causal broadcast is not ready for fully decentralized applications
+    % that do not rely on intermediate servers, and where the number of users and
+    % their behavior is unknown\ldots
+
+    \textit{\textbf{What if\ldots} I want to develop fully decentralized applications?\ldots}
 
 \end{frame}
 
@@ -145,9 +147,10 @@
   \vspace{1em}
 
   \begin{definition}[Causal order]
-    The delivery order of messages follows Lamport's happen before relationships of the
-    corresponding broadcasts. $\forall A,\,B,\,C,\,
-    b_A(m) \rightarrow b_B(m') \implies d_C(m) \rightarrow d_C(m')$
+    The delivery order of messages follows the Lamport's happen before relationships
+    $\rightarrow$ of the corresponding broadcasts.
+    $\forall A,\,B,\,C,\, b_A(m) \rightarrow b_B(m') \implies d_C(m) \rightarrow
+    d_C(m')$
   \end{definition}
 
 %  \textit{When Alice comments on Bob's picture, everyone sees Alice's comment
@@ -172,11 +175,11 @@
   % How do we keep the complexity of causal broadcast for large scale static
   % systems in dynamic settings where processes can join, leave, or
   % self-reconfigure at any time?
-  How do we manage to causal broadcast\\
+  How to enable causal broadcast\\
   (i) in large scale systems comprising
   from hundreds to millions of processes\\
-  (ii) in dynamic settings where any process can join, leave,
-  self-reconfigure, or crash at any time?
+  (ii) in dynamic settings where any process can join, leave, self-reconfigure,
+  or crash at any time?
 
   \vspace{2em}
   
@@ -612,7 +615,7 @@
   \vspace{1em}
 
   Fully decentralized applications can finally afford to use causal broadcast
-  for their operation.
+  for their operation. 
 
   % \vspace{2em}
 
